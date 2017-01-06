@@ -8,7 +8,16 @@ var view = {
 
   paintCell: function(coords, className) {
     view.getCell(coords).addClass(className);
-  }
+  },
+
+  getDirection: function(updateDirection) {
+    var ARROWS = { 37: 'l', 38: 'u', 39: 'r', 40: 'd' };
+    $(window).on('keydown', function(e) {
+      if (ARROWS.hasOwnProperty(e.keyCode)) {
+        updateDirection(ARROWS[e.keyCode]);
+      }
+    });
+  },
 
 
 };
