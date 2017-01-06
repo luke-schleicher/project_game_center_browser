@@ -7,3 +7,11 @@
   border: 1px solid silver;
   display: inline-block;
 }
+
+.snake {
+  background: black;
+}
+
+.food {
+  background: yellow;
+}
