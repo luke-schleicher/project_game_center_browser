@@ -10,7 +10,7 @@ var model = {
   },
 
   snake: {
-    coords: [4, 4],
+    coords: [[4, 4]],
     facing: "r",
     length: 2,
     name: "snake",
@@ -19,17 +19,21 @@ var model = {
   moveSnake: function() {
 
     var direction = this.snake.facing;
-    var coords = this.snake.coords;
+    var snakeHead = this.snake.coords[0];
 
+    var newCoords = snakeHead.slice();
     if (direction === 'r') {
-      coords[0]++;
+      newCoords[0]++;
     } else if (direction === 'l') {
-      coords[0]--;
+      newCoords[0]--;
     } else if (direction === 'd') {
-      coords[1]++;
+      newCoords[1]++;
     } else {
-      coords[1]--;
+      newCoords[1]--;
     }
+    this.snake.coords.unshift(newCoords);
+
+    return this.snake.coords.pop();
 
   },
 

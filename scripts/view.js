@@ -7,7 +7,7 @@ var view = {
   },
 
   paintCell: function(coords, className) {
-    view.getCell(coords).addClass(className);
+    view.getCell(coords).toggleClass(className);
   },
 
   getDirection: function(updateDirection) {

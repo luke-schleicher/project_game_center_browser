@@ -1,7 +1,7 @@
 var controller = {
 
   init: function() {
-    view.paintCell(model.snake.coords, model.snake.name);
+    view.paintCell(model.snake.coords[0], model.snake.name);
     view.paintCell(model.food.coords, model.food.name);
     view.getDirection(this.updateDirection);
     controller.loopInterval = setInterval(controller.gameLoop, 1000);
@@ -12,12 +12,13 @@ var controller = {
     // check death conditions
 
 
-    
+
     // update snake model
-    model.moveSnake();
+    var deadSnakeTail = model.moveSnake();
 
     // render the snake
-    view.paintCell(model.snake.coords, model.snake.name);
+    view.paintCell(model.snake.coords[0], model.snake.name);
+    view.paintCell(deadSnakeTail, model.snake.name);
 
     // update food model
     // render the food
