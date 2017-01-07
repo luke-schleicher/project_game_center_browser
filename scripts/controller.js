@@ -18,7 +18,9 @@ var controller = {
 
     // render the snake
     view.paintCell(model.snake.coords[0], model.snake.name);
-    view.paintCell(deadSnakeTail, model.snake.name);
+    if (deadSnakeTail) {
+      view.paintCell(deadSnakeTail, model.snake.name);
+    }
 
     // update food model
     // render the food

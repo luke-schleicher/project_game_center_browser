@@ -33,7 +33,14 @@ var model = {
     }
     this.snake.coords.unshift(newCoords);
 
-    return this.snake.coords.pop();
+    var deadSnakeTail;
+    if (this.snake.coords.length > this.snake.length) {
+      deadSnakeTail = this.snake.coords.pop();
+    } else {
+      deadSnakeTail = null;
+    }
+
+    return deadSnakeTail;
 
   },
 
