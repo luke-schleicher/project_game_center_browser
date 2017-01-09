@@ -99,27 +99,17 @@ var model = {
       this.snake.length++;
       this.score += 10;
       this.setFoodCoords();
-      console.log(controller.loopInterval);
       return currentCoords;
     }
     return false;
   },
 
   setFoodCoords: function() {
-    var coordsUnique = true;
-    do  {
-      var coords = this.randomCoords();
-      var snakeCoords = this.snake.coords;
-      for (var i = 0; i < snakeCoords.length; i++) {
-        var xSame = coords[0] === snakeCoords[i][0];
-        var ySame = coords[1] === snakeCoords[i][1];
-        if (xSame && ySame) {
-          coordsUnique = false;
-          break;
-        }  
-      }
-    } while (coordsUnique === false)
+
+    var coords = this.randomCoords();
     this.food.coords = coords;
+    return coords;
+
   },
 
   randomCoords: function() {
