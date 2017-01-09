@@ -1,29 +1,42 @@
 var controller = {
 
   init: function() {
-    view.paintCell(model.snake.coords[0], model.snake.name);
-    view.paintCell(model.food.coords, model.food.name);
-    view.getDirection(this.updateDirection);
-    controller.loopInterval = setInterval(controller.gameLoop, 1000);
+    model.buildGame();
+    view.buildGame(model);
+    view.setDirectionListener(this.updateDirection, model.snake);
+    this.loopInterval = setInterval(this.gameLoop, 120);
   },
 
   gameLoop: function() {
 
-    // check death conditions
-
-
-
     // update snake model
-    var deadSnakeTail = model.moveSnake();
+    model.moveSnake();
+    model.checkLife();
+    var deadSnakeTail = model.checkSnakeTail();
+
+    // check for death
+    if (model.snake.dead) {
+      clearInterval(controller.loopInterval);
+      view.endGame(model.score);
+      return false;
+    }
+
+    // update food model
+    var currentCoords = model.updateFood(deadSnakeTail);
+    if (currentCoords) {
+      view.buildFood(model.food);
+      view.removeFood(currentCoords);
+    }
 
     // render the snake
     view.paintCell(model.snake.coords[0], model.snake.name);
+
     if (deadSnakeTail) {
       view.paintCell(deadSnakeTail, model.snake.name);
     }
 
-    // update food model
-    // render the food
+    // render the score
+    view.updateScore(model.score);
 
   },
 
@@ -32,5 +45,3 @@ var controller = {
   }
 
 };
-
-controller.init();
